@@ -5,7 +5,7 @@ description: Learn how to route requests in apps and about the NavLink component
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/06/2019
+ms.date: 05/14/2019
 uid: blazor/routing
 ---
 # Blazor routing
@@ -102,3 +102,26 @@ There are two `NavLinkMatch` options:
 * `NavLinkMatch.Prefix` &ndash; Specifies that the NavLink should be active when it matches any prefix of the current URL.
 
 In the preceding example, the Home NavLink (`href=""`) matches all URLs and always receives the `active` CSS class. The second NavLink only receives the `active` class when the user visits the Blazor Route component (`href="BlazorRoute"`).
+
+## Route in C# code with IUrlHelper
+
+Use `Microsoft.AspNetCore.Components.IUriHelper` to navigate in C# code. The following component navigates to the app's Counter component when the button is selected:
+
+```cshtml
+@page "/navigate"
+@using Microsoft.AspNetCore.Components
+@inject IUriHelper UrlHelper
+
+<h1>Navigate in Code Example</h1>
+
+<button class="btn btn-primary" onclick="@NavigateToCounterComponent">
+    Navigate to the Counter component
+</button>
+
+@functions {
+    private void NavigateToCounterComponent()
+    {
+        UrlHelper.NavigateTo("counter");
+    }
+}
+```
